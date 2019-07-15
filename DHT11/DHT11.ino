@@ -12,25 +12,25 @@ void setup() {
 
 void loop() {
   delay(5000);
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
-  float f = dht.readTemperature(true);
+  float hum = dht.readHumidity();
+  float tempC = dht.readTemperature();
+  float tempF = dht.readTemperature(true);
 
-  if (isnan(h) || isnan(t) || isnan(f)) {
+  if (isnan(hum) || isnan(tempC) || isnan(tempF)) {
     Serial.println(F("NULL"));
     return;
   }
 
-  float hif = dht.computeHeatIndex(f, h);
-  float hic = dht.computeHeatIndex(t, h, false);
-  Serial.print(h);
+  float hiF = dht.computeHeatIndex(tempF, hum);
+  float hiC = dht.computeHeatIndex(tempC, hum, false);
+  Serial.print(hum);
   Serial.print(",");
-  Serial.print(t);
+  Serial.print(tempC);
   Serial.print(",");
-  Serial.print(f);
+  Serial.print(tempF);
   Serial.print(",");
-  Serial.print(hic);
+  Serial.print(hiC);
   Serial.print(",");
-  Serial.print(hif);
+  Serial.print(hiF);
   Serial.print("\n");
 }
